@@ -33,6 +33,17 @@
   		
   	</div>
   </section>
+
+  <section class="section">
+		<div class="columns is-multiline is-mobile">
+			<div v-for="note in notes" class="column is-one-third">
+				<!-- <div class="notifaction is-primary">
+					<strong>Note: {{note}}</strong>
+				</div> -->
+				<note v-bind:note_title ="note.title" v-bind:note_id="note.id" v-bind:note_content="note.content"></note>
+			</div>	
+		</div>
+	</section>
 </div>
 
 [[block page_scripts]]
