@@ -36,14 +36,43 @@ from . common import db, session, T, cache, auth, signed_url
 
 
 url_signer = URLSigner(session)
+#so we can get user email
+def get_user_email():
+    return auth.current_user.get('email') if auth.current_user else None
 
 # The auth.user below forces login.
 @action('index')
 @action.uses('index.html', url_signer)
 def index():
-    return dict(
+	return dict(
         # This is an example of a signed URL for the callback.
         # See the index.html template for how this is passed to the javascript.
-        callback_url = URL('callback', signer=url_signer),
+		callback_url = URL('callback', signer=url_signer),
+		add_note_url = URL('addNote', signer=url_signer),
+		# get_notes_url = URL('getNotes', signer=url_signer)
     )
+
+
+@action('addNote', method="POST")
+@action.uses(url_signer.verify(), db, auth.user)
+def addNote():
+	data = request.json
+	title = data.get('title')
+	content = data.get('content')
+	color = data.get('color')
+
+	id = db.notes.insert(title = title, content = content, color = color, email = get_user_email())
+	return dict(noteId = id)
+
+
+@action('getNotes', method=["GET", "POST"])
+@action.uses(url_signer.verify(), db, auth.user)
+def getNotes():
+	email = get_user_email()
+	results = db(db.notes.user_email == email).select().as_list()
+	return dict(notes = results)
+
+
+
+
 

@@ -2,16 +2,16 @@
 (function(){
 
     var note = {
-        props: ['note_title', 'note_content', 'note_id'],
+        props: ['note_title', 'note_id', 'note_content'],
         data: null,
         methods: {}
     };
 
     note.data = function() {
         var data = {
-            title : this.title,
-            content : this.content,
-            id : this.id
+            title : this.note_title,
+            content : this.note_content,
+            id : this.note_id
         };
         note.methods.load.call(data);
         return data;

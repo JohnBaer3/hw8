@@ -24,12 +24,11 @@ let init = (app) => {
         let content = app.data.content
         let color = app.data.color
         axios.post(add_note_url, {'title' : title, 'content' : content, 'color' : color}).then((response) =>{
-            console.log("yeet")
+            console.log(response.data)
             app.data.title = ''
             app.data.content = ''
             app.data.color = '#FFB6C1'
             app.data.addNoteState = false
-
         }).catch((error) =>{
             console.log(error)
         })
