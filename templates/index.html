@@ -2,7 +2,36 @@
 
 <div id="vue-target">
   <section class="section">
-
+  	<span v-on:click="toggleNote" class title is-2>
+  		<i v-if="!addNoteState" class="fa fa-plus-circle"></i>
+  		<i v-if="addNoteState" class="fa fa-minus-square"></i>
+  		
+  	</span>
+  	<div v-if="addNoteState">
+  		<label>TITLE</label>
+  		<div class="control is-medium">
+  			<input type="text" v-model="text" class="input is-focused" placeholder="Focused input"></input>
+  			
+  		</div>
+  		<label>ADD NOTE</label>
+  		<div class="control is-medium">
+  			<input type="text" v-model="content" class="textarea" placeholder="10 lines of textarea">
+  		</div>
+  		<h1>color picker</h1>
+  		<span>
+  			<button class="button f-red-color">RED</button>
+  			<button class="button f-blue-color">BLUE</button>
+  			<button class="button f-green-color">GREEN</button>
+  			<button class="button f-yellow-color">YELLOW</button>
+  			<button class="button f-purple-color">PURPLE</button>
+  			<button class="button f-pink-color">PINK</button>
+  		</span>
+  		<h1>submit button</h1>
+  		<button v-on:click="submit" class="button is-primary">
+  			submit
+  		</button>
+  		
+  	</div>
   </section>
 </div>
 

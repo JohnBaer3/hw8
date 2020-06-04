@@ -8,11 +8,39 @@ let init = (app) => {
 
     // This is the Vue data.
     app.data = {
+        addNoteState : false,
+        title : '',
+        content : '',
+        color : '#FFB6C1',
+        notes : []
     };
+
+    app.toggleNote = () => {
+        app.data.addNoteState = !app.data.addNoteState
+    }
+
+    app.submit = () => {
+        let title = app.data.title
+        let content = app.data.content
+        let color = app.data.color
+        axios.post(add_note_url, {'title' : title, 'content' : content, 'color' : color}).then((response) =>{
+            console.log("yeet")
+            app.data.title = ''
+            app.data.content = ''
+            app.data.color = '#FFB6C1'
+            app.data.addNoteState = false
+
+        }).catch((error) =>{
+            console.log(error)
+        })
+
+    }
 
     // We form the dictionary of all methods, so we can assign them
     // to the Vue app in a single blow.
     app.methods = {
+        toggleNote : app.toggleNote,
+        submit : app.submit
     };
 
     // This creates the Vue instance.
@@ -24,6 +52,11 @@ let init = (app) => {
 
     // And this initializes it.
     app.init = () => {
+        axios.get(get_notes_url).then((response) => {
+            app.data.notes = response.data.notes
+        }).catch((error) => {
+            console.log(error)
+        })
     };
 
     // Call to the initializer.
