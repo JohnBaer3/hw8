@@ -23,7 +23,7 @@ def get_time():
 db.define_table('notes',
 	Field('title', 'text'),
 	Field('content', 'text'),
-	Field('color', default="#E71D36"),
+	Field('color', default="#FFB6C1"),
 	Field('star', 'integer', default=0),
 	Field('user_email', default= get_user_email()),
 	Field('ts', 'datetime', default=get_time())

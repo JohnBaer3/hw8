@@ -35,11 +35,23 @@ let init = (app) => {
         })
     }
 
+    app.setColor = (pickedColor) => {
+        if(pickedColor = 0)
+            app.data.color = '#FF3860'
+        else if(pickedColor = 1)
+            app.data.color = '#3273DC'//color hex value
+        else if(pickedColor = 2)
+            app.data.color = '#48C774'//color hex value
+        else if(pickedColor = 3)
+            app.data.color = '#FFDD57'//color hex value
+    }
+
     // We form the dictionary of all methods, so we can assign them
     // to the Vue app in a single blow.
     app.methods = {
         toggleNote : app.toggleNote,
-        submit : app.submit
+        submit : app.submit,
+        colorValue : app.setColor
     };
 
     // This creates the Vue instance.
@@ -52,10 +64,12 @@ let init = (app) => {
     // And this initializes it.
     app.init = () => {
         axios.get(get_notes_url).then((response) => {
-            app.data.notes = response.data.notes
-        }).catch((error) => {
-            console.log(error)
-        })
+            console.log(response.data)
+
+             app.data.notes = response.data.notes
+         }).catch((error) => {
+             console.log(error)
+         })
     };
 
     // Call to the initializer.

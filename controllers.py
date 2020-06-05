@@ -36,7 +36,7 @@ from . common import db, session, T, cache, auth, signed_url
 
 
 url_signer = URLSigner(session)
-#so we can get user email
+# so we can get user email
 def get_user_email():
     return auth.current_user.get('email') if auth.current_user else None
 
@@ -44,35 +44,45 @@ def get_user_email():
 @action('index')
 @action.uses('index.html', url_signer, auth.user)
 def index():
-	return dict(
+    return dict(
         # This is an example of a signed URL for the callback.
         # See the index.html template for how this is passed to the javascript.
-		callback_url = URL('callback', signer=url_signer),
-		add_note_url = URL('addNote', signer=url_signer),
-		get_notes_url = URL('getNotes', signer=url_signer)
+        callback_url = URL('callback', signer=url_signer),
+        add_note_url = URL('add_note', signer=url_signer),
+        get_notes_url = URL('get_notes', signer=url_signer)
     )
+    # pass
 
+@action('add_note', method="POST")
+@action.uses(url_signer.verify(), auth.user, db)
+def add_note():
+    # Complete.
 
-@action('addNote', method="POST")
+    params = request.json
+    titleText = params.get('title')
+    content = params.get('content')
+    color = params.get('color')
+
+    id = db.notes.insert(title = titleText, content = content, color = color, user_email = get_user_email())
+    return dict(note_id = id)
+    # pass
+
+@action('get_notes', method=["GET", "POST"])
 @action.uses(url_signer.verify(), db, auth.user)
-def addNote():
-	data = request.json
-	title = data.get('title')
-	content = data.get('content')
-	color = data.get('color')
-
-	id = db.notes.insert(title = title, content = content, color = color, email = get_user_email())
-	return dict(noteId = id)
-
-
-@action('getNotes', method=["GET", "POST"])
-@action.uses(url_signer.verify(), db, auth.user)
-def getNotes():
+def get_notes():
+	# loop through notes in and get them onto home page
 	email = get_user_email()
-	results = db(db.notes.user_email == email).select().as_list()
-	return dict(notes = results)
+	notes = db(db.notes.user_email == email).select().as_list()
+	#TODO order posts from newest to oldest
+	return dict(notes = notes)
 
 
 
 
 
+
+
+
+
+
+    
