@@ -17,5 +17,16 @@ from pydal.validators import *
 
 def get_user_email():
     return auth.current_user.get('email') if auth.current_user else None
+def get_time():
+	return datetime.datetime.utcnow()
+
+db.define_table('notes',
+	Field('title', 'text'),
+	Field('content', 'text'),
+	Field('color', default="#E71D36"),
+	Field('star', 'integer', default=0),
+	Field('user_email', default= get_user_email()),
+	Field('ts', 'datetime', default=get_time())
+	)
 
 db.commit()

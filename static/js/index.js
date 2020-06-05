@@ -23,6 +23,7 @@ let init = (app) => {
         let title = app.data.title
         let content = app.data.content
         let color = app.data.color
+        
         axios.post(add_note_url, {'title' : title, 'content' : content, 'color' : color}).then((response) =>{
             console.log(response.data)
             app.data.title = ''
@@ -32,7 +33,6 @@ let init = (app) => {
         }).catch((error) =>{
             console.log(error)
         })
-
     }
 
     // We form the dictionary of all methods, so we can assign them
@@ -51,11 +51,11 @@ let init = (app) => {
 
     // And this initializes it.
     app.init = () => {
-        // axios.get(get_notes_url).then((response) => {
-        //     app.data.notes = response.data.notes
-        // }).catch((error) => {
-        //     console.log(error)
-        // })
+        axios.get(get_notes_url).then((response) => {
+            app.data.notes = response.data.notes
+        }).catch((error) => {
+            console.log(error)
+        })
     };
 
     // Call to the initializer.

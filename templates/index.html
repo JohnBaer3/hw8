@@ -2,7 +2,7 @@
 
 <div id="vue-target">
   <section class="section">
-  	<span v-on:click="toggleNote" class title is-2>
+  	<span v-on:click="toggleNote" class="title is-2">
   		<i v-if="!addNoteState" class="fa fa-plus-circle"></i>
   		<i v-if="addNoteState" class="fa fa-minus-square"></i>
   		
@@ -10,7 +10,7 @@
   	<div v-if="addNoteState">
   		<label>TITLE</label>
   		<div class="control is-medium">
-  			<input type="text" v-model="text" class="input is-focused" placeholder="Focused input"></input>
+  			<input type="text" v-model="title" class="input is-focused" placeholder="Focused input"></input>
   			
   		</div>
   		<label>ADD NOTE</label>
@@ -40,7 +40,7 @@
 				<!-- <div class="notifaction is-primary">
 					<strong>Note: {{note}}</strong>
 				</div> -->
-				<note v-bind:note_title ="note.title" v-bind:note_id="note.id" v-bind:note_content="note.content" v-bind:color="color"></note>
+				<note v-bind:note_title ="note.title" v-bind:note_id="note.id" v-bind:note_content="note.content"></note>
 			</div>	
 		</div>
 	</section>
@@ -51,7 +51,7 @@
 <script>
 	let callback_url = "[[=XML(callback_url)]]";
 	let add_note_url = "[[=XML(add_note_url)]]";
-	
+	let get_notes_url = "[[=XML(get_notes_url)]]";
 
 </script>
 <script src="js/index.js"></script>

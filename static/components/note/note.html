@@ -1,11 +1,21 @@
 <div class="notification is-primary" v-bind:class="{background-color : color}">
-	<div>
+	<div v-if="!edit_mode" @click="edit_note">
 		<h1><strong>{{title}}</strong></h1>
 		<p>{{content}}</p>
 	</div>
 
-	<div class = "control">
-			<input class = "input is-primary" type="text" placeholder="Primary input">
 
+
+	<div v-if="edit_mode">
+		<div class = "control">
+			<input class = "input is-primary" type="text" placeholder="Primary input">
+		</div>
+
+		<div class = "control">
+			<textarea class = "textarea is-primary" placeholder="Primary textarea"></textarea>
+		</div>
+
+		<button class = "btn"> Submit </button>
 	</div>
+
 </div>
