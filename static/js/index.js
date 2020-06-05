@@ -51,11 +51,11 @@ let init = (app) => {
 
     // And this initializes it.
     app.init = () => {
-        axios.get(get_notes_url).then((response) => {
-            app.data.notes = response.data.notes
-        }).catch((error) => {
-            console.log(error)
-        })
+        // axios.get(get_notes_url).then((response) => {
+        //     app.data.notes = response.data.notes
+        // }).catch((error) => {
+        //     console.log(error)
+        // })
     };
 
     // Call to the initializer.

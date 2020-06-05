@@ -1,4 +1,11 @@
-<div class="notification is-primary">
-	<h1><strong>{{title}}</strong></h1>
-	<p>{{content}}</p>
+<div class="notification is-primary" v-bind:class="{background-color : color}">
+	<div>
+		<h1><strong>{{title}}</strong></h1>
+		<p>{{content}}</p>
+	</div>
+
+	<div class = "control">
+			<input class = "input is-primary" type="text" placeholder="Primary input">
+
+	</div>
 </div>

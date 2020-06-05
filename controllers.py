@@ -65,12 +65,12 @@ def addNote():
 	return dict(noteId = id)
 
 
-@action('getNotes', method=["GET", "POST"])
-@action.uses(url_signer.verify(), db, auth.user)
-def getNotes():
-	email = get_user_email()
-	results = db(db.notes.user_email == email).select().as_list()
-	return dict(notes = results)
+# @action('getNotes', method=["GET", "POST"])
+# @action.uses(url_signer.verify(), db, auth.user)
+# def getNotes():
+# 	email = get_user_email()
+# 	results = db(db.notes.user_email == email).select().as_list()
+# 	return dict(notes = results)
 
 
 

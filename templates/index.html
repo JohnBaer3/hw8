@@ -28,7 +28,7 @@
   		</span>
   		<h1>submit button</h1>
   		<button v-on:click="submit" class="button is-primary">
-  			submit
+  			Submit
   		</button>
   		
   	</div>
@@ -40,7 +40,7 @@
 				<!-- <div class="notifaction is-primary">
 					<strong>Note: {{note}}</strong>
 				</div> -->
-				<note v-bind:note_title ="note.title" v-bind:note_id="note.id" v-bind:note_content="note.content"></note>
+				<note v-bind:note_title ="note.title" v-bind:note_id="note.id" v-bind:note_content="note.content" v-bind:color="color"></note>
 			</div>	
 		</div>
 	</section>
@@ -51,8 +51,7 @@
 <script>
 	let callback_url = "[[=XML(callback_url)]]";
 	let add_note_url = "[[=XML(add_note_url)]]";
-	let get_notes_url = "[[=XML(get_notes_url]]";
-
+	
 
 </script>
 <script src="js/index.js"></script>

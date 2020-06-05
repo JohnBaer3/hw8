@@ -2,7 +2,7 @@
 (function(){
 
     var note = {
-        props: ['note_title', 'note_id', 'note_content'],
+        props: ['note_title', 'note_id', 'note_content', 'color'],
         data: null,
         methods: {}
     };
@@ -11,7 +11,8 @@
         var data = {
             title : this.note_title,
             content : this.note_content,
-            id : this.note_id
+            id : this.note_id,
+            color: this.color
         };
         note.methods.load.call(data);
         return data;
